@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Create Room – Case Study | Kalyani Banginwar</title>
+  <link rel="icon" type="image/png" href="Kb 2 logo .png">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
+  <style>
+    :root {
+      --pink: #f4a7a7;
+      --pink-lt: #fde8e8;
+      --blush: #fdf5f5;
+      --dark: #1a1a1a;
+      --mid: #555;
+      --light: #888;
+      --white: #ffffff;
+      --accent: #e05c5c;
+      --yellow: #f5c842;
+      --green: #5cb85c;
+      --blue: #4a90d9;
+      --purple: #9b59b6;
+      --radius: 12px;
+      --muted: #8A7A6E;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      width: 100%;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: #fff;
+    }
+
+    /* ========== NAVIGATION BAR ========== */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 5vw;
+      backdrop-filter: blur(12px);
+      background: rgba(253, 250, 246, 0.96);
+      border-bottom: 1px solid rgba(76, 138, 47, 0.2);
+      transition: all 0.3s ease;
+      animation: navSlideDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    @keyframes navSlideDown {
+      from {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--dark);
+      text-decoration: none;
+      z-index: 1001;
+    }
+
+    .nav-center {
+      display: flex;
+      gap: 40px;
+      list-style: none;
+      margin: 0 auto;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .nav-center li a {
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #000;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .nav-center li a:hover {
+      color: var(--accent);
+    }
+
+    .nav-back {
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-left: auto;
+      z-index: 1001;
+    }
+
+    .nav-back::before {
+      content: '←';
+      font-size: 16px;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 28px;
+      height: 20px;
+      cursor: pointer;
+      z-index: 1001;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background: var(--dark);
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    .hamburger.open span:nth-child(1) {
+      transform: translateY(9px) rotate(45deg);
+    }
+
+    .hamburger.open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.open span:nth-child(3) {
+      transform: translateY(-9px) rotate(-45deg);
+    }
+
+    .mobile-menu-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 998;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .mobile-menu-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 75%;
+      max-width: 320px;
+      height: 100vh;
+      background: rgba(253, 250, 246, 0.98);
+      backdrop-filter: blur(20px);
+      z-index: 999;
+      padding: 100px 40px 40px;
+      transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: -5px 0 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .mobile-menu.active {
+      right: 0;
+    }
+
+    .mobile-menu ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .mobile-menu ul li a {
+      font-size: 18px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--dark);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .mobile-menu .mobile-back {
+      margin-top: 40px;
+      font-size: 14px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .mobile-menu .mobile-back::before {
+      content: '←';
+      font-size: 16px;
+    }
+
+    @media (max-width: 900px) {
+      .nav-center {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .nav-back {
+        display: none;
+      }
+
+      nav {
+        padding: 14px 5vw;
+      }
+    }
+
+    @media (min-width: 901px) {
+
+      .mobile-menu,
+      .mobile-menu-overlay {
+        display: none;
+      }
+    }
+
+    .page-wrap {
+      width: 100%;
+      max-width: 100%;
+      margin: 0 auto;
+      background: #fff;
+      overflow-x: hidden;
+      padding-top: 0;
+    }
+
+    /* ===== HERO SECTION ===== */
+    .hero {
+      width: 100%;
+      min-height: 560px;
+      background: url("img/jrb quiz/Frame 1984078426.png") no-repeat center center;
+      background-size: cover;
+      display: flex;
+      align-items: center;
+      padding: 40px 5%;
+      position: relative;
+      min-height: 700px;
+    }
+    
+
+    .hero-overlay {
+      position: relative;
+      z-index: 2;
+      max-width: 550px;
+      width: 100%;
+      padding: 24px 28px;
+      border-radius: 24px;
+      margin-top: -15%;
+    }
+
+    .hero-overlay h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px, 8vw, 52px);
+      font-weight: 700;
+      margin-bottom: 15px;
+      color: var(--dark);
+      line-height: 1.2;
+    }
+
+    .hero-overlay p {
+      font-size: clamp(14px, 4vw, 18px);
+      color: #2c2c2c;
+      line-height: 1.6;
+    }
+
+    section {
+      padding: 48px 5%;
+    }
+
+    section+section {
+      border-top: 1px solid #f0f0f0;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 6vw, 42px);
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--dark);
+    }
+
+    .section-sub {
+      font-size: clamp(14px, 3.5vw, 18px);
+      color: var(--light);
+      margin-bottom: 32px;
+      line-height: 1.5;
+    }
+
+    .approach {
+      padding: 60px 5%;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .approach-grid {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .approach-text {
+      flex: 1;
+      min-width: 260px;
+    }
+
+    .approach-text p {
+      margin-bottom: 18px;
+      line-height: 1.6;
+      color: var(--mid);
+    }
+
+    .approach-image {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      min-width: 240px;
+    }
+
+    .approach-image img {
+      max-width: 100%;
+      width: 100%;
+      height: auto;
+    }
+
+    .process {
+      text-align: center;
+      background-color: #E6E1DC;
+      padding: 60px 5%;
+    }
+
+    .process-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .process-image {
+      flex: 1;
+      max-width: 550px;
+      margin: 0 auto;
+    }
+
+    .process-image img {
+      width: 100%;
+      height: auto;
+      border-radius: 24px;
+    }
+
+    /* ========== EMPATHY MAP – FULLY FIXED FOR MOBILE ========== */
+    .empathy {
+      background: var(--white);
+      padding: 60px 5%;
+    }
+
+    .empathy .section-title {
+      width: 100%;
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    /* DESKTOP GRID (original approach but enhanced) */
+    .map-wrapper {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      grid-template-rows: auto auto;
+      gap: 20px 24px;
+      align-items: start;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    .quadrant {
+      padding: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .quadrant h2 {
+      font-size: clamp(22px, 5vw, 32px);
+      font-weight: 800;
+      color: #1a1a1a;
+      margin-bottom: 20px;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .mini-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .mini-card {
+      background: #f5f4f1;
+      border-radius: 14px;
+      padding: 16px 12px;
+      font-size: clamp(12px, 3vw, 15px);
+      color: #1a1a1a;
+      line-height: 1.5;
+      font-family: 'DM Sans', sans-serif;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .mini-card:hover {
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.10);
+    }
+
+    .center-cell {
+      grid-column: 2;
+      grid-row: 1 / 3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+      padding: 0 8px;
+    }
+
+    .center-cell img {
+      width: 85%;
+      max-width: 200px;
+      height: auto;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 24px;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+      margin-top: 83%;
+      animation: floatCenter 5s ease-in-out infinite;
+    }
+
+    @keyframes floatCenter {
+
+      0%,
+      100% {
+        transform: translateY(0px);
+      }
+
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
+    .top-left {
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    .top-right {
+      grid-column: 3;
+      grid-row: 1;
+    }
+
+    .bottom-left {
+      grid-column: 1;
+      grid-row: 2;
+      margin-top: 0;
+      padding-top: 0;
+    }
+
+    .bottom-right {
+      grid-column: 3;
+      grid-row: 2;
+      margin-top: 0;
+      padding-top: 0;
+    }
+
+    /* 🔥 FIXED: Mobile empathy map layout — center image properly aligned, no overlap, natural stacking */
+    @media (max-width: 780px) {
+      .map-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 28px;
+      }
+
+      /* Center image moves to top with proper spacing & alignment */
+      .center-cell {
+        order: -1;
+        /* image comes first */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        margin: 0 auto 12px auto;
+        padding: 0;
+      }
+
+      .center-cell img {
+        max-width: 180px;
+        width: 70%;
+        margin-top: 0;
+        /* remove negative margin-top that was causing misalignment */
+        aspect-ratio: 1/1;
+        border-radius: 28px;
+        box-shadow: 0 16px 28px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Quadrants stack vertically in natural order */
+      .quadrant {
+        width: 100%;
+        margin-bottom: 8px;
+      }
+
+      .quadrant h2 {
+        text-align: center;
+        margin-bottom: 14px;
+        font-size: 26px;
+      }
+
+      .mini-grid {
+        grid-template-columns: 1fr;
+        /* single column on mobile for better readability */
+        gap: 10px;
+      }
+
+      .mini-card {
+        text-align: center;
+        padding: 14px 12px;
+      }
+
+      /* Remove any leftover grid-related positioning */
+      .top-left,
+      .top-right,
+      .bottom-left,
+      .bottom-right {
+        grid-column: auto;
+        grid-row: auto;
+      }
+    }
+
+    /* For tablets between 600px and 780px, keep mini-grid two columns if desired but center image still fixed */
+    @media (min-width: 600px) and (max-width: 780px) {
+      .mini-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .center-cell img {
+        max-width: 200px;
+        width: 55%;
+      }
+    }
+
+    .showcase-image {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+    }
+
+    .showcase-image img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+    }
+
+    .thankyou-sec {
+      background: #f5f3f0;
+      padding: 64px 5%;
+    }
+
+    .ty-container {
+      display: flex;
+      align-items: center;
+      gap: 48px;
+      max-width: 1280px;
+      margin: 0 auto;
+      flex-wrap: wrap;
+    }
+
+    .ty-left {
+      flex: 1;
+      min-width: 260px;
+    }
+
+    .ty-left h3 {
+      font-size: clamp(28px, 6vw, 42px);
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 20px;
+      color: #1a1a1a;
+    }
+
+    .ty-left p {
+      font-size: clamp(14px, 3.5vw, 16px);
+      line-height: 1.6;
+      color: #5f6b7a;
+      margin-bottom: 24px;
+    }
+
+    .ty-left h2 {
+      font-size: clamp(36px, 8vw, 58px);
+      margin-top: 32px;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .ty-left span {
+      border-bottom: 4px solid #e05c5c;
+    }
+
+    .ty-right {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      min-width: 240px;
+    }
+
+    .ty-right img {
+      width: 100%;
+      max-width: 550px;
+      height: auto;
+      box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+    }
+
+    .next-project {
+      background: #E6E1DC;
+      padding: 60px 6vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 28px;
+    }
+
+    .next-project h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 40px;
+      font-weight: 300;
+      color: var(--dark);
+    }
+
+    .next-project a {
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--dark);
+      text-decoration: none;
+      border-bottom: 1px solid var(--dark);
+      padding-bottom: 4px;
+      transition: 0.2s;
+    }
+
+    .next-project a:hover {
+      opacity: 0.7;
+      letter-spacing: 0.25em;
+    }
+
+    .reveal,
+    .reveal-left,
+    .reveal-right,
+    .reveal-scale {
+      opacity: 0;
+      transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1), transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .reveal {
+      transform: translateY(36px);
+    }
+
+    .reveal-left {
+      transform: translateX(-40px);
+    }
+
+    .reveal-right {
+      transform: translateX(40px);
+    }
+
+    .reveal-scale {
+      transform: scale(0.92);
+    }
+
+    .reveal.visible,
+    .reveal-left.visible,
+    .reveal-right.visible,
+    .reveal-scale.visible {
+      opacity: 1;
+      transform: translateX(0) translateY(0) scale(1);
+    }
+
+    .hero-overlay {
+      animation: heroSlideUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    @keyframes heroSlideUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .approach-image img {
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s;
+    }
+
+    .approach-image img:hover {
+      transform: rotate(-1deg) scale(1.02);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.13);
+    }
+
+    .process-image img {
+      animation: gentleBob 6s ease-in-out infinite;
+    }
+
+    @keyframes gentleBob {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-6px);
+      }
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        min-height: 500px;
+        background-position: 70% center;
+        padding: 30px 5%;
+      }
+
+      .hero-overlay {
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(3px);
+        padding: 20px 22px;
+      }
+
+      .approach-grid {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .approach-text {
+        text-align: center;
+      }
+
+      .process-content {
+        flex-direction: column;
+      }
+
+      .section-title,
+      .section-sub {
+        text-align: center;
+      }
+
+      .ty-container {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .ty-left {
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      section {
+        padding: 40px 20px;
+      }
+
+      .hero-overlay {
+        padding: 16px 18px;
+      }
+
+      .mini-card {
+        padding: 12px 10px;
+      }
+
+      .ty-left h2 {
+        font-size: 32px;
+      }
+    }
+
+    img,
+    video,
+    iframe {
+      max-width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <a href="index.html" class="nav-logo">K.</a>
+    <ul class="nav-center">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="Projects.html">Projects</a></li>
+      <li><a href="about-me.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="hamburger" id="hamburgerBtn">
+      <span></span><span></span><span></span>
+    </div>
+    <a href="index.html" class="nav-back">Back to Portfolio</a>
+  </nav>
+  <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="Projects.html">Projects</a></li>
+      <li><a href="about-me.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <a href="index.html" class="mobile-back">Back to Portfolio</a>
+  </div>
+
+  <div class="page-wrap">
+    <section class="hero">
+      <div class="hero-overlay">
+        <h1>Create Room PDP</h1>
+        <p>The challenge was presenting extensive product information without making the page feel heavy or
+          overwhelming. The solution focused on transforming detailed specifications into a clean, interactive, and
+          visually guided experience.</p>
+      </div>
+    </section>
+
+    <section class="approach reveal">
+      <div class="container">
+        <div class="approach-grid">
+          <div class="approach-text reveal-left">
+            <h2 class="section-title">Design Approach</h2>
+            <p class="section-sub">Screen-centered, data-driven separation</p>
+            <p>Screen-centered with a data-driven separation makes every customization screen its own territory.
+              Horizontal navigation allows the user to NOT see EVERYTHING at once.</p>
+            <p>Use of iconography, color patterns and filtering is explored to build out features and offerings, along
+              the way while the user can see what they're offering.</p>
+          </div>
+          <div class="approach-image reveal-right">
+            <img src="img/Create Room/Screenshot 2025-12-29 at 9.55.04 PM.png" alt="design approach visual">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="process reveal">
+      <h2 class="section-title">Design Process</h2>
+      <p class="section-sub">Five-stage double diamond methodology</p>
+      <div class="process-content">
+        <div class="process-image reveal-scale">
+          <img src="img/Create Room/Group 1000009010.png" alt="Design Process">
+        </div>
+      </div>
+    </section>
+
+    <!-- EMPATHY MAP - FIXED MOBILE CENTER IMAGE LAYOUT -->
+    <section class="empathy reveal">
+      <h2 class="section-title" style="text-align:center;">Empathy Map</h2>
+      <div class="map-wrapper">
+        <div class="quadrant top-left reveal-left">
+          <h2>Says</h2>
+          <div class="mini-grid">
+            <div class="mini-card">"I need all my craft supplies in one place."</div>
+            <div class="mini-card">"I don't have space for a full craft room."</div>
+            <div class="mini-card">"I waste time searching for materials."</div>
+            <div class="mini-card">"I want my space to look clean, not cluttered."</div>
+          </div>
+        </div>
+        <div class="center-cell">
+          <img src="img/Create Room/Horizontal_1e498418-e174-4306-a280-9b89f59d80ed.jpg.webp" alt="User">
+        </div>
+        <div class="quadrant top-right reveal-right">
+          <h2>Thinks</h2>
+          <div class="mini-grid">
+            <div class="mini-card">If everything is organized, I'll create more.</div>
+            <div class="mini-card">It's expensive... but is it worth the productivity?</div>
+            <div class="mini-card">Will this actually fit in my home?</div>
+            <div class="mini-card">I want a setup that feels professional.</div>
+          </div>
+        </div>
+        <div class="quadrant bottom-left reveal-left">
+          <h2>Does</h2>
+          <div class="mini-grid">
+            <div class="mini-card">Scrolls Pinterest and craft studio tours.</div>
+            <div class="mini-card">Buys storage bins and DIY organizers.</div>
+            <div class="mini-card">Works on dining tables or temporary setups.</div>
+            <div class="mini-card">Starts projects but pauses due to mess.</div>
+          </div>
+        </div>
+        <div class="quadrant bottom-right reveal-right">
+          <h2>Feels</h2>
+          <div class="mini-grid">
+            <div class="mini-card">Overwhelmed by clutter.</div>
+            <div class="mini-card">Frustrated by lack of dedicated space.</div>
+            <div class="mini-card">Excited about creative potential.</div>
+            <div class="mini-card">Proud imagining a fully organized craft studio.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="showcase-image">
+        <img src="img/Create Room/hight fidelity wireframes.png" alt="Product Screens">
+      </div>
+    </section>
+
+    <section class="thankyou-sec">
+      <div class="ty-container">
+        <div class="ty-left reveal-left">
+          <h3>How It Works</h3>
+          <p>The layout follows a progressive flow - from introduction, to feature exploration, to comparison, and
+            finally purchase confidence. Information is layered visually, using images, modules, and structured sections
+            instead of dense paragraphs.</p>
+          <p>The result is a content-rich yet crisp interface that educates, engages, and drives conversion without
+            overwhelming the user.</p>
+          <h2>Thank <span>you.</span></h2>
+        </div>
+        <div class="ty-right reveal-right">
+          <img src="img/Create Room/Group 1000008977.png" alt="Final Showcase">
+        </div>
+      </div>
+    </section>
+
+    <div class="next-project fade-up">
+      <h2>Next: <em style="font-style:italic">Padharo-Sa →</em></h2>
+      <a href="Padharo-Sa.html">View Case Study</a>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var targets = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: "0px 0px -10px 0px" });
+      targets.forEach(function (el) { observer.observe(el); });
+    })();
+
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileOverlay = document.getElementById('mobileMenuOverlay');
+
+    function closeMenu() {
+      hamburgerBtn.classList.remove('open');
+      mobileMenu.classList.remove('active');
+      mobileOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function openMenu() {
+      hamburgerBtn.classList.add('open');
+      mobileMenu.classList.add('active');
+      mobileOverlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    if (hamburgerBtn && mobileMenu && mobileOverlay) {
+      hamburgerBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (mobileMenu.classList.contains('active')) closeMenu();
+        else openMenu();
+      });
+      mobileOverlay.addEventListener('click', closeMenu);
+      mobileMenu.querySelectorAll('a').forEach(link => { link.addEventListener('click', closeMenu); });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && mobileMenu.classList.contains('active')) closeMenu(); });
+    }
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 900 && mobileMenu && mobileMenu.classList.contains('active')) closeMenu();
+    });
+
+    window.addEventListener('scroll', () => {
+      const nav = document.querySelector('nav');
+      if (window.scrollY > 20) nav.style.boxShadow = '0 4px 24px rgba(0,0,0,0.08)';
+      else nav.style.boxShadow = 'none';
+    });
+  </script>
+</body>
+
+</html>

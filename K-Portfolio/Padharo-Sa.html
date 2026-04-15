@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+  <title>Padharo Sa – Kiosk Menu Design | Rajasthani Dining Experience</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <link rel="icon" type="image/png" href="Kb 2 logo .png">
+  <style>
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --gold: #C9922A;
+      --gold-light: #E8B84B;
+      --gold-pale: #F5DFA0;
+      --black: #0D0D0D;
+      --dark: #141414;
+      --dark2: #1C1B19;
+      --dark3: #242320;
+      --text-main: #F0E8D8;
+      --text-muted: #9A8E7A;
+      --text-dim: #5E5649;
+      --cream: #FAF3E4;
+      --border: rgba(201, 146, 42, 0.25);
+      --section-gap: 90px;
+      --muted: #8A7A6E;
+      --accent: #C9922A;
+    }
+
+    body {
+      background: #0a0a0a;
+      color: var(--text-main);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+      border-radius: 0px !important;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 40px;
+      width: 100%;
+    }
+
+    @media (max-width: 1024px) {
+      .container {
+        padding: 0 28px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 20px;
+      }
+    }
+
+    .section-tag {
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 500;
+      display: inline-block;
+      margin-bottom: 16px;
+      border-left: 2px solid var(--gold);
+      padding-left: 12px;
+    }
+
+    /* ========== NAVIGATION BAR (FULL, WITH HAMBURGER) ========== */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 5vw;
+      backdrop-filter: blur(12px);
+      background: rgba(253, 250, 246, 0.96);
+      border-bottom: 1px solid rgba(201, 146, 42, 0.3);
+      transition: all 0.3s ease;
+      animation: navSlideDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    @keyframes navSlideDown {
+      from {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: #000;
+      text-decoration: none;
+      z-index: 1001;
+    }
+
+    /* Desktop Navigation Links */
+    .nav-center {
+      display: flex;
+      gap: 40px;
+      list-style: none;
+      margin: 0 auto;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .nav-center li a {
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #000;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .nav-center li a:hover {
+      color: var(--gold);
+    }
+
+    .nav-back {
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-left: auto;
+      z-index: 1001;
+    }
+
+    .nav-back::before {
+      content: '←';
+      font-size: 16px;
+    }
+
+    /* Hamburger Menu */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 28px;
+      height: 20px;
+      cursor: pointer;
+      z-index: 1001;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background: #000;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    .hamburger.open span:nth-child(1) {
+      transform: translateY(9px) rotate(45deg);
+    }
+
+    .hamburger.open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.open span:nth-child(3) {
+      transform: translateY(-9px) rotate(-45deg);
+    }
+
+    /* Mobile Menu Overlay */
+    .mobile-menu-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 998;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .mobile-menu-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 75%;
+      max-width: 320px;
+      height: 100vh;
+      background: rgba(253, 250, 246, 0.98);
+      backdrop-filter: blur(20px);
+      z-index: 999;
+      padding: 100px 40px 40px;
+      transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: -5px 0 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .mobile-menu.active {
+      right: 0;
+    }
+
+    .mobile-menu ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .mobile-menu ul li a {
+      font-size: 18px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #000;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .mobile-menu ul li a:hover {
+      color: var(--gold);
+    }
+
+    .mobile-menu .mobile-back {
+      margin-top: 40px;
+      font-size: 14px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .mobile-menu .mobile-back::before {
+      content: '←';
+      font-size: 16px;
+    }
+
+    @media (max-width: 900px) {
+      .nav-center {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .nav-back {
+        display: none;
+      }
+
+      nav {
+        padding: 14px 5vw;
+      }
+    }
+
+    @media (min-width: 901px) {
+
+      .mobile-menu,
+      .mobile-menu-overlay {
+        display: none;
+      }
+    }
+
+    /* HERO SECTION */
+    #hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 50px;
+      background: #ffffff;
+      padding: 120px 0 80px 0;
+    }
+
+    .hero-left {
+      padding-left: 48px;
+    }
+
+    .hero-tag {
+      font-size: 12px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .hero-title {
+      font-size: clamp(44px, 6vw, 74px);
+      color: #000000;
+      margin-bottom: 12px;
+      line-height: 1.08;
+    }
+
+    .hero-title em {
+      font-style: normal;
+      color: var(--gold);
+    }
+
+    .hero-subtitle {
+      font-size: 15px;
+      color: #1e1e1e;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+      font-weight: 500;
+    }
+
+    .hero-desc {
+      font-size: 16px;
+      color: #2c2c2c;
+      max-width: 460px;
+      margin-bottom: 44px;
+      line-height: 1.75;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      margin-bottom: 8px;
+    }
+
+    .hero-meta-item .key {
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #4a4a4a;
+      display: block;
+      font-weight: 500;
+    }
+
+    .hero-meta-item .val {
+      font-size: 15px;
+      color: #000000;
+      font-weight: 500;
+    }
+
+    .hero-right {
+      width: 100%;
+      padding-right: 48px;
+    }
+
+    .hero-img-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .hero-img-frame img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      display: block;
+    }
+
+    /* overview clean */
+    #overview-clean {
+      background: #000000;
+      padding: 80px 0 60px;
+    }
+
+    .overview-top {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 0 20px 40px;
+    }
+
+    .overview-top h2 {
+      font-size: clamp(32px, 5vw, 48px);
+      color: var(--gold-light);
+      margin: 20px 0 24px;
+    }
+
+    .overview-top p {
+      color: #d1cbbd;
+      line-height: 1.8;
+      margin-bottom: 20px;
+      font-size: 16px;
+    }
+
+    .overview-image-full {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    .overview-image-full img {
+      width: 70%;
+      height: auto;
+    }
+
+    /* branding & benefits */
+    #branding {
+      background: white;
+      padding: 80px 0;
+      border-top: 1px solid #eee;
+      border-bottom: 1px solid #eee;
+    }
+
+    .branding-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .branding-header h2 {
+      font-size: clamp(28px, 4vw, 42px);
+      color: #000;
+    }
+
+    .branding-header p {
+      color: #5a5a5a;
+      margin-top: 12px;
+    }
+
+    .kiosk-benefits {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 20px 0;
+    }
+
+    .benefit-row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 40px;
+    }
+
+    .benefit-item {
+      width: 160px;
+      height: 160px;
+      background: #E3C067;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-size: 16px;
+      font-weight: 700;
+      color: #000;
+      line-height: 1.4;
+      box-shadow: 0 10px 22px rgba(0, 0, 0, 0.1);
+      transition: transform 0.25s ease;
+    }
+
+    .benefit-item:hover {
+      transform: translateY(-6px);
+    }
+
+    /* palette + user flow section */
+    #palette {
+      background: #1b1919;
+      padding: 80px 0;
+    }
+
+    .center-text {
+      text-align: center;
+    }
+
+    .center-text h2 {
+      font-size: clamp(32px, 4.5vw, 48px);
+      color: var(--gold-light);
+    }
+
+    .concept-image {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-top: 40px;
+    }
+
+    .concept-image img {
+      width: 85%;
+      height: auto;
+    }
+
+    /* typography + texture row - FIXED FOR MOBILE */
+    #typography {
+      background: #ffffff;
+      padding: 70px 0 0px;
+    }
+
+    .img-flex {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 40px;
+    }
+
+    .img-item {
+      flex: 1;
+      min-width: 260px;
+      max-width: 320px;
+      text-align: center;
+    }
+
+    .img-item img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .img-item p {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #2b2b2b;
+      line-height: 1.6;
+      max-width: 280px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .color-palette {
+      display: flex;
+      width: 100%;
+      height: 100px;
+      margin-top: 50px;
+    }
+
+    .color-block {
+      flex: 1;
+    }
+
+    .color-block.black {
+      background: #000000;
+    }
+
+    .color-block.gold {
+      background: #E3C067;
+    }
+
+    .color-block.terracotta {
+      background: #E06A4E;
+    }
+
+    /* mockups full width no radius */
+    #mockups {
+      background: #000;
+      padding: 0;
+    }
+
+    .mockup-full {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    .mockup-full img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* showcase */
+    #showcase {
+      background: #F4DCA9;
+      padding: 70px 0;
+    }
+
+    .showcase-header h2 {
+      text-align: center;
+      color: #000;
+      font-size: clamp(32px, 4vw, 44px);
+      margin-bottom: 48px;
+    }
+
+    .showcase-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      align-items: stretch;
+    }
+
+    .showcase-left {
+      flex: 1.2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .showcase-left img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .showcase-right {
+      flex: 1;
+      display: flex;
+    }
+
+    .showcase-right img {
+      width: 100%;
+      height: 89%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* menu-items */
+    #menu-items {
+      background: #fff;
+      padding: 60px 0 0;
+    }
+
+    .menu-header h2 {
+      text-align: center;
+      color: #111;
+      font-size: clamp(28px, 4vw, 38px);
+      margin-bottom: 24px;
+    }
+
+    .menu-full {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    .menu-full img {
+      width: 75%;
+      height: auto;
+    }
+
+    #kiosk-highlight {
+      width: 100%;
+      background: #f8f2e4;
+    }
+
+    #kiosk-highlight img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* code validation */
+    #code-validation {
+      background: #ffffff;
+      padding: 80px 0;
+    }
+
+    .cv-wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 50px;
+      align-items: center;
+      padding: 0 30px;
+    }
+
+    .cv-left {
+      flex: 1;
+    }
+
+    .cv-left img {
+      width: 100%;
+      display: block;
+    }
+
+    .cv-right {
+      flex: 1;
+    }
+
+    .cv-right h2 {
+      font-size: 32px;
+      color: #111;
+      margin-bottom: 20px;
+    }
+
+    .cv-right p {
+      color: #3a3a3a;
+      font-size: 16px;
+      margin-bottom: 20px;
+      line-height: 1.65;
+    }
+
+    .cv-right ul {
+      padding-left: 20px;
+      margin-bottom: 20px;
+    }
+
+    .cv-right li {
+      margin-bottom: 8px;
+      font-size: 15px;
+      color: #2c2c2c;
+    }
+
+    /* ========== IMPROVED MOBILE VIEW FIXES ========== */
+    @media (max-width: 1024px) {
+      #hero {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding: 100px 0 60px;
+      }
+
+      .hero-left {
+        padding-left: 24px;
+        padding-right: 24px;
+      }
+
+      .hero-right {
+        padding-right: 24px;
+        padding-left: 24px;
+      }
+
+      .hero-img-grid {
+        gap: 16px;
+      }
+
+      .overview-image-full img {
+        width: 85%;
+      }
+
+      .showcase-wrapper {
+        flex-direction: column;
+      }
+
+      .showcase-left {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .menu-full img {
+        width: 90%;
+      }
+
+      .concept-image img {
+        width: 95%;
+      }
+    }
+
+    @media (max-width: 768px) {
+
+      .hero-left,
+      .hero-right {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+
+      .hero-meta {
+        gap: 24px;
+        row-gap: 16px;
+      }
+
+      .benefit-item {
+        width: 130px;
+        height: 130px;
+        font-size: 13px;
+      }
+
+      .img-item img {
+        height: 260px;
+      }
+
+      .showcase-left img {
+        height: 180px;
+      }
+
+      .cv-wrapper {
+        flex-direction: column;
+        padding: 0 20px;
+      }
+
+      .cv-right h2 {
+        font-size: 28px;
+      }
+
+      .overview-image-full img {
+        width: 100%;
+      }
+
+      .menu-full img {
+        width: 100%;
+      }
+    }
+
+    /* CRITICAL MOBILE FIXES - TYPOGRAPHY SECTION NOW PERFECT */
+    @media (max-width: 580px) {
+      .hero-img-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .hero-meta {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .benefit-row {
+        gap: 20px;
+      }
+
+      .benefit-item {
+        width: 110px;
+        height: 110px;
+        font-size: 12px;
+      }
+
+      .showcase-left {
+        grid-template-columns: 1fr;
+      }
+
+      .showcase-left img {
+        height: auto;
+        max-height: 260px;
+        width: 100%;
+      }
+
+      .section-tag {
+        font-size: 10px;
+      }
+
+      .hero-title {
+        font-size: 40px;
+      }
+
+      .hero-subtitle {
+        font-size: 13px;
+      }
+
+      .hero-desc {
+        font-size: 15px;
+      }
+
+      .overview-top p {
+        font-size: 15px;
+      }
+
+      .branding-header h2 {
+        font-size: 24px;
+      }
+
+      .cv-right h2 {
+        font-size: 26px;
+      }
+
+      .cv-right p,
+      .cv-right li {
+        font-size: 14px;
+      }
+
+      body {
+        font-size: 15px;
+      }
+
+      .container,
+      .hero-left,
+      .hero-right,
+      .overview-top,
+      .cv-wrapper {
+        overflow-x: hidden;
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+
+      /* FIXED: Typography section - images and text align properly on mobile */
+      .img-flex {
+        flex-direction: column;
+        align-items: center;
+        gap: 35px;
+      }
+
+      .img-item {
+        width: 100%;
+        max-width: 320px;
+        margin: 0 auto;
+      }
+
+      .img-item img {
+        height: auto;
+        max-height: 280px;
+        width: 100%;
+        object-fit: cover;
+      }
+
+      .img-item p {
+        font-size: 14px;
+        padding: 0 12px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .img-item img {
+        height: auto;
+        max-height: 240px;
+      }
+
+      .concept-image img {
+        width: 100%;
+      }
+
+      .menu-full img {
+        width: 100%;
+      }
+
+      .mockup-full img {
+        width: 100%;
+      }
+
+      .showcase-right img {
+        height: auto;
+        max-height: 400px;
+      }
+
+      .color-palette {
+        height: 80px;
+      }
+    }
+
+    img,
+    .hero-img-frame img,
+    .overview-image-full img,
+    .concept-image img,
+    .img-item img,
+    .showcase-left img,
+    .showcase-right img,
+    .menu-full img,
+    .mockup-full img,
+    #kiosk-highlight img,
+    .cv-left img {
+      border-radius: 0px !important;
+    }
+
+    .benefit-item {
+      border-radius: 50% !important;
+    }
+
+    .color-block {
+      border-radius: 0px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- FULL NAVIGATION BAR -->
+  <nav>
+    <a href="index.html" class="nav-logo">K.</a>
+
+    <!-- Desktop Navigation -->
+    <ul class="nav-center">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="Projects.html">Projects</a></li>
+      <li><a href="about-me.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+
+    <!-- Hamburger Menu Button (Mobile) -->
+    <div class="hamburger" id="hamburgerBtn">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <a href="index.html" class="nav-back">Back to Portfolio</a>
+  </nav>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="Projects.html">Projects</a></li>
+      <li><a href="about-me.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <a href="index.html" class="mobile-back">Back to Portfolio</a>
+  </div>
+
+  <!-- HERO SECTION -->
+  <section id="hero">
+    <div class="hero-left">
+      <span class="hero-tag">UI / UX · Kiosk Design</span>
+      <h1 class="hero-title">Kiosk Menu<br><em>Design</em></h1>
+      <p class="hero-subtitle">'Padharo Sa Restaurant' — A Traditional Rajasthani Restaurant</p>
+      <p class="hero-desc">
+        Unlock the full experience - watch the walkthrough now!
+      </p>
+      <div class="hero-meta">
+        <div class="hero-meta-item"><span class="key">Where</span><span class="val">Rajasthan, India</span></div>
+        <div class="hero-meta-item"><span class="key">What</span><span class="val">Kiosk Design</span></div>
+        <div class="hero-meta-item"><span class="key">Why</span><span class="val">Portfolio Project</span></div>
+      </div>
+      <div class="hero-meta">
+        <div class="hero-meta-item"><span class="key">Role</span><span class="val">Researcher, Designer</span></div>
+        <div class="hero-meta-item"><span class="key">Category</span><span class="val">Food & Drinks</span></div>
+        <div class="hero-meta-item"><span class="key">Duration</span><span class="val">25 days</span></div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-img-grid">
+        <div class="hero-img-frame"><img src="img/Padharo Sa/Rectangle 119.png" alt="Padharo Sa Cover"></div>
+        <div class="hero-img-frame"><img src="img/Padharo Sa/Rectangle 121.png" alt="Kiosk UI"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OVERVIEW clean section -->
+  <section id="overview-clean">
+    <div class="overview-top">
+      <span class="section-tag">WHY DID I CREATE THIS KIOSK</span>
+      <h2>Where Tradition Meets Digital Dining</h2>
+      <p>As a curator, I've meticulously fashioned each dish to honor the vibrant Rajasthani culture. You'll experience
+        the essence of Rajasthan through vivid descriptions, captivating visuals, and even immersive sounds.</p>
+      <p>Stepping into my designer role, my main goal was to create a user-friendly kiosk experience — concise yet
+        informative, modern yet rooted in tradition. The result is a seamless digital journey that enhances ordering
+        while preserving cultural richness.</p>
+    </div>
+    <div class="overview-image-full">
+      <img src="img/Padharo Sa/moodboard-01 1.png" alt="Kiosk UI Design">
+    </div>
+  </section>
+
+  <!-- BRANDING + KIOSK BENEFITS -->
+  <section id="branding">
+    <div class="container">
+      <div class="branding-header">
+        <span class="section-tag">Visual Identity</span>
+        <h2>WHY KIOSK AND HOW IT IS HELPFUL</h2>
+        <p>Logo, ornamentation, and identity system designed to reflect culture and cuisine.</p>
+      </div>
+      <div class="kiosk-benefits">
+        <div class="benefit-row">
+          <div class="benefit-item">ALLERGEN<br>LIST</div>
+          <div class="benefit-item">USER<br>FRIENDLY</div>
+          <div class="benefit-item">VISUALLY<br>APPEALING</div>
+          <div class="benefit-item">AUDIO<br>DESCRIPTION</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- USER FLOW -->
+  <section id="palette">
+    <div class="container">
+      <div class="center-text">
+        <h2>User Flow</h2>
+      </div>
+      <div class="concept-image">
+        <img src="img/Padharo Sa/Concept Map-2 1.png" alt="User Flow Diagram">
+      </div>
+    </div>
+  </section>
+
+  <!-- TYPOGRAPHY AND TEXTURE - FIXED VERSION -->
+  <section id="typography">
+    <div class="container">
+      <div class="img-flex">
+        <div class="img-item">
+          <img src="img/Padharo Sa/bg 1.png" alt="Black Texture">
+          <p>Black backgrounds can provide a dramatic backdrop for images and videos, making them pop and creating a
+            more immersive viewing experience.</p>
+        </div>
+        <div class="img-item">
+          <img src="img/Padharo Sa/art-01 1.png" alt="Mandala">
+          <p>Mandalas have roots in various cultures around the world, from Hindu traditions to Native American. Using
+            mandala art can convey a sense of cultural diversity and inclusivity.</p>
+        </div>
+        <div class="img-item">
+          <img src="img/Padharo Sa/goldenbg 1.png" alt="Gold Texture">
+          <p>Associations with Prestige, High-End Products or Services</p>
+        </div>
+      </div>
+    </div>
+    <div class="color-palette">
+      <div class="color-block black"></div>
+      <div class="color-block gold"></div>
+      <div class="color-block terracotta"></div>
+    </div>
+  </section>
+
+  <!-- MOCKUPS SECTION -->
+  <section id="mockups">
+    <div class="mockup-full">
+      <img src="img/Padharo Sa/Frame 40.png" alt="Kiosk Screens Mockup">
+    </div>
+  </section>
+
+  <!-- SHOWCASE VARIATIONS -->
+  <section id="showcase">
+    <div class="container">
+      <div class="showcase-header">
+        <h2>Variations</h2>
+      </div>
+      <div class="showcase-wrapper">
+        <div class="showcase-left">
+          <img src="img/Padharo Sa/Rectangle 154.png" alt="">
+          <img src="img/Padharo Sa/Rectangle 155.png" alt="">
+          <img src="img/Padharo Sa/Rectangle 138.png" alt="">
+          <img src="img/Padharo Sa/Rectangle 153.png" alt="">
+        </div>
+        <div class="showcase-right">
+          <img src="img/Padharo Sa/Rectangle 139.png" alt="">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENU SPECIAL SECTION -->
+  <section id="menu-items">
+    <div class="container">
+      <div class="menu-header">
+        <h2>What is so special about the kiosk</h2>
+      </div>
+    </div>
+    <div class="menu-full">
+      <img src="img/Padharo Sa/Screenshot 2022-10-23 at 8.25.00 PM 1.png" alt="Menu Showcase">
+    </div>
+  </section>
+
+  <!-- HIGHLIGHT KIOSK IMAGE -->
+  <section id="kiosk-highlight">
+    <img src="img/Padharo Sa/ps.png" alt="Kiosk Showcase Highlight">
+  </section>
+
+  <!-- CODE VALIDATION SECTION -->
+  <section id="code-validation">
+    <div class="cv-wrapper">
+      <div class="cv-left">
+        <img src="img/Padharo Sa/Rectangle 156.png" alt="Code Validation">
+      </div>
+      <div class="cv-right">
+        <h2>CODE VALIDATION</h2>
+        <p>Code validation is fundamental to building reliable, maintainable, and secure software. It ensures systems
+          perform as intended while minimizing technical debt and long-term risk.</p>
+        <ul>
+          <li>Early detection of errors, reducing defects and production failures.</li>
+          <li>Higher code quality through adherence to standards and best practices.</li>
+          <li>Stronger security by identifying vulnerabilities before deployment.</li>
+          <li>Smoother collaboration with consistent structure and review processes.</li>
+          <li>Lower development costs by minimizing rework and debugging cycles.</li>
+        </ul>
+        <p>By identifying issues early in the lifecycle, validation improves stability, accelerates delivery, and
+          enhances user trust.</p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Hamburger menu toggle with outside click support
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileOverlay = document.getElementById('mobileMenuOverlay');
+
+    function closeMenu() {
+      hamburgerBtn.classList.remove('open');
+      mobileMenu.classList.remove('active');
+      mobileOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function openMenu() {
+      hamburgerBtn.classList.add('open');
+      mobileMenu.classList.add('active');
+      mobileOverlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    if (hamburgerBtn && mobileMenu && mobileOverlay) {
+      hamburgerBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (mobileMenu.classList.contains('active')) {
+          closeMenu();
+        } else {
+          openMenu();
+        }
+      });
+
+      mobileOverlay.addEventListener('click', closeMenu);
+      mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', closeMenu);
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
+          closeMenu();
+        }
+      });
+    }
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 900 && mobileMenu && mobileMenu.classList.contains('active')) {
+        closeMenu();
+      }
+    });
+
+    // Nav shadow on scroll
+    window.addEventListener('scroll', () => {
+      const nav = document.querySelector('nav');
+      if (window.scrollY > 20) nav.style.boxShadow = '0 4px 24px rgba(0,0,0,0.08)';
+      else nav.style.boxShadow = 'none';
+    });
+  </script>
+</body>
+
+</html>

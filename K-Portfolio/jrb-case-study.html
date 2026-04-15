@@ -1,0 +1,1480 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>JRB – Jones Road Beauty | Kalyani Banginwar</title>
+
+  <link rel="icon" type="image/png" href="Kb 2 logo .png">
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap"
+    rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --cream: #F5F0E8;
+      --sand: #E8DDD0;
+      --warm: #C4A882;
+      --dark: #1A1410;
+      --mid: #3D2F25;
+      --muted: #8A7A6E;
+      --accent: #B8967A;
+      --white: #FDFAF6;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    body {
+      background: var(--white);
+      color: var(--dark);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 5vw;
+      backdrop-filter: blur(12px);
+      background: rgba(253, 250, 246, 0.92);
+      border-bottom: 1px solid rgba(196, 168, 130, 0.2);
+      transition: all 0.3s ease;
+      animation: navSlideDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    @keyframes navSlideDown {
+      from {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--dark);
+      text-decoration: none;
+      z-index: 101;
+    }
+
+    /* Desktop Navigation Links */
+    .nav-center {
+      display: flex;
+      gap: 40px;
+      list-style: none;
+      margin: 0 auto;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .nav-center li a {
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .nav-center li a:hover {
+      color: var(--dark);
+    }
+
+    .nav-back {
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-left: auto;
+      z-index: 101;
+    }
+
+    .nav-back::before {
+      content: '←';
+      font-size: 16px;
+    }
+
+    /* ========== HAMBURGER MENU (MOBILE) ========== */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 28px;
+      height: 20px;
+      cursor: pointer;
+      z-index: 101;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background: var(--dark);
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    /* Mobile Menu Overlay */
+    .mobile-menu-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 998;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .mobile-menu-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 75%;
+      max-width: 320px;
+      height: 100vh;
+      background: rgba(253, 250, 246, 0.98);
+      backdrop-filter: blur(20px);
+      z-index: 999;
+      padding: 100px 40px 40px;
+      transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: -5px 0 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .mobile-menu.active {
+      right: 0;
+    }
+
+    .mobile-menu ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .mobile-menu ul li a {
+      font-size: 18px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--dark);
+      text-decoration: none;
+      font-weight: 400;
+      transition: color 0.2s;
+    }
+
+    .mobile-menu ul li a:hover {
+      color: var(--accent);
+    }
+
+    .mobile-menu .mobile-back {
+      margin-top: 40px;
+      font-size: 14px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .mobile-menu .mobile-back::before {
+      content: '←';
+      font-size: 16px;
+    }
+
+    /* Hamburger animation when open */
+    .hamburger.open span:nth-child(1) {
+      transform: translateY(9px) rotate(45deg);
+    }
+    .hamburger.open span:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger.open span:nth-child(3) {
+      transform: translateY(-9px) rotate(-45deg);
+    }
+
+    /* Mobile nav adjustments */
+    @media (max-width: 900px) {
+      .nav-center {
+        display: none;
+      }
+      .hamburger {
+        display: flex;
+      }
+      .nav-back {
+        display: none;
+      }
+      nav {
+        padding: 16px 5vw;
+      }
+    }
+
+    @media (min-width: 901px) {
+      .mobile-menu,
+      .mobile-menu-overlay {
+        display: none;
+      }
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 120px 5vw 80px 6vw;
+      position: relative;
+    }
+
+    .hero-tag {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      animation: heroFadeUp 0.9s 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    .hero-tag::before {
+      content: '';
+      width: 32px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(48px, 7vw, 88px);
+      font-weight: 300;
+      line-height: 1.0;
+      margin-bottom: 32px;
+      animation: heroFadeUp 0.9s 0.45s both;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--warm);
+    }
+
+    .hero-desc {
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--muted);
+      max-width: 560px;
+      animation: heroFadeUp 0.9s 0.6s both;
+    }
+
+    .hero-meta {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(196, 168, 130, 0.2);
+      margin-top: 40px;
+      animation: heroFadeUp 0.9s 0.75s both;
+    }
+
+    .meta-item label {
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .meta-item span {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 16px;
+      color: var(--dark);
+    }
+
+    .hero-img-main {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: right center;
+    }
+
+    .hero-right {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-right::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+    }
+
+    .hero-img-main {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 8s ease;
+    }
+
+    .hero:hover .hero-img-main {
+      transform: scale(1.02);
+    }
+
+    .hero-number {
+      position: absolute;
+      top: 50%;
+      right: 32px;
+      transform: translateY(-50%);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 140px;
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.04);
+      pointer-events: none;
+    }
+
+    @keyframes heroFadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(32px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* GENERAL SECTIONS */
+    section,
+    .showcase,
+    .bobbi,
+    .results {
+      padding: 80px 6vw;
+    }
+
+    .section-tag {
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-tag::before {
+      content: '';
+      width: 24px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(32px, 4.5vw, 56px);
+      font-weight: 300;
+      line-height: 1.2;
+      margin-bottom: 24px;
+    }
+
+    .section-title em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .section-body {
+      font-size: 15px;
+      line-height: 1.9;
+      color: var(--muted);
+      max-width: 600px;
+    }
+
+    /* CHALLENGE */
+    .challenge {
+      background: var(--white);
+    }
+
+    .challenge-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px;
+      margin-top: 60px;
+    }
+
+    .challenge-points {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .challenge-points li {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      transition: transform 0.2s;
+    }
+
+    .challenge-points li:hover {
+      transform: translateX(6px);
+    }
+
+    .point-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 42px;
+      font-weight: 300;
+      color: var(--sand);
+      line-height: 1;
+      min-width: 44px;
+    }
+
+    .point-text strong {
+      display: block;
+      font-size: 17px;
+      font-weight: 500;
+      color: var(--dark);
+      margin-bottom: 6px;
+    }
+
+    .point-text p {
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+
+    /* SOLUTIONS / GOALS */
+    .solutions {
+      background: var(--cream);
+    }
+
+    .solutions-intro {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 60px;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+
+    .goals-row {
+      display: flex;
+      justify-content: center;
+      gap: 60px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .goal {
+      max-width: 260px;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .goal:hover {
+      transform: translateY(-6px);
+    }
+
+    .goal-icon {
+      width: 80px;
+      height: 80px;
+      background: #8b6f5a;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .goal:hover .goal-icon {
+      transform: scale(1.05);
+      box-shadow: 0 12px 24px rgba(139, 111, 90, 0.2);
+    }
+
+    .goal-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 50%;
+    }
+
+    .goal p {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--mid);
+    }
+
+    /* FULL WIDTH IMAGES */
+    .footer-full-img {
+      width: 100%;
+      display: block;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* NOTE CARD */
+    .wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px 5vw 40px;
+    }
+
+    .note-card {
+      background: #fff;
+      border-radius: 18px;
+      padding: 24px 28px;
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.03);
+      margin-bottom: 48px;
+      flex-wrap: wrap;
+      border: 1px solid #eee;
+    }
+
+    .step-badge {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #796140;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .note-content {
+      flex: 1;
+    }
+
+    .note-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: var(--dark);
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    .note-list {
+      list-style: disc;
+      padding-left: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .note-list li {
+      font-size: 14px;
+      color: #4a3e35;
+      line-height: 1.5;
+    }
+
+    /* TESTIMONIALS */
+    .testimonials {
+      background: var(--cream);
+    }
+
+    .testimonials-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 60px;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 4px;
+      background: var(--sand);
+    }
+
+    .testi-item {
+      background: var(--white);
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 1;
+    }
+
+    .testi-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .testi-item:hover img {
+      transform: scale(1.06);
+    }
+
+    .testi-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 40%, rgba(26, 20, 16, 0.85) 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 28px;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.35s, transform 0.35s;
+    }
+
+    .testi-item:hover .testi-overlay {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .testi-quote-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 15px;
+      font-style: italic;
+      color: var(--cream);
+      line-height: 1.4;
+      margin-bottom: 8px;
+    }
+
+    .testi-author {
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--warm);
+    }
+
+    /* RESULTS */
+    .results {
+      background: var(--dark);
+    }
+
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      background: rgba(196, 168, 130, 0.15);
+      margin-top: 60px;
+    }
+
+    .result-item {
+      background: var(--dark);
+      padding: 48px 24px;
+      border: 1px solid rgba(196, 168, 130, 0.1);
+      transition: all 0.2s;
+      text-align: center;
+    }
+
+    .result-item:hover {
+      border-color: var(--accent);
+      background: rgba(196, 168, 130, 0.05);
+      transform: translateY(-3px);
+    }
+
+    .result-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 56px;
+      font-weight: 300;
+      line-height: 1;
+      color: var(--cream);
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .result-label {
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .results .section-title {
+      color: var(--cream);
+    }
+
+    /* NEXT PROJECT */
+    .next-project {
+      background: var(--accent);
+      padding: 60px 6vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 28px;
+    }
+
+    .next-project h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 40px;
+      font-weight: 300;
+      color: var(--dark);
+    }
+
+    .next-project a {
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--dark);
+      text-decoration: none;
+      border-bottom: 1px solid var(--dark);
+      padding-bottom: 4px;
+      transition: 0.2s;
+    }
+
+    .next-project a:hover {
+      opacity: 0.7;
+      letter-spacing: 0.25em;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--dark);
+      padding: 50px 6vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 28px;
+      border-top: 1px solid rgba(196, 168, 130, 0.1);
+    }
+
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      color: var(--cream);
+      font-weight: 300;
+    }
+
+    .footer-copy {
+      font-size: 12px;
+      color: rgba(245, 240, 232, 0.4);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(245, 240, 232, 0.5);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+
+    /* SCROLL ANIMATIONS */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(48px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .stagger-children>* {
+      opacity: 0;
+      transform: translateY(36px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .stagger-children.visible>*:nth-child(1) {
+      opacity: 1;
+      transform: translateY(0);
+      transition-delay: 0s;
+    }
+
+    .stagger-children.visible>*:nth-child(2) {
+      opacity: 1;
+      transform: translateY(0);
+      transition-delay: 0.08s;
+    }
+
+    .stagger-children.visible>*:nth-child(3) {
+      opacity: 1;
+      transform: translateY(0);
+      transition-delay: 0.16s;
+    }
+
+    .stagger-children.visible>*:nth-child(4) {
+      opacity: 1;
+      transform: translateY(0);
+      transition-delay: 0.24s;
+    }
+
+    .stagger-children.visible>*:nth-child(5) {
+      opacity: 1;
+      transform: translateY(0);
+      transition-delay: 0.32s;
+    }
+
+    .stagger-children.visible>*:nth-child(6) {
+      opacity: 1;
+      transform: translateY(0);
+      transition-delay: 0.4s;
+    }
+
+    .stagger-children.visible>*:nth-child(7) {
+      opacity: 1;
+      transform: translateY(0);
+      transition-delay: 0.48s;
+    }
+
+    .slide-right {
+      opacity: 0;
+      transform: translateX(56px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .slide-right.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* LAYOUT COMPONENTS */
+    .category-layout {
+      display: flex;
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto 60px auto;
+      align-items: flex-start;
+      padding: 0 5vw;
+    }
+
+    .category-left {
+      flex: 2;
+    }
+
+    .category-left img {
+      width: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .category-right {
+      flex: 1;
+      padding: 12px;
+    }
+
+    .category-right img {
+      width: 100%;
+      display: block;
+    }
+
+    .brand-section {
+      display: flex;
+      gap: 20px;
+      max-width: 1200px;
+      margin: 0 auto 60px auto;
+      padding: 0 5vw;
+    }
+
+    .brand-left {
+      flex: 3;
+    }
+
+    .brand-left img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+
+    .brand-right {
+      flex: 1;
+    }
+
+    .brand-right img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+
+    .banner-wrap {
+      display: flex;
+      gap: 20px;
+      max-width: 1200px;
+      margin: 0 auto 60px auto;
+      padding: 0 5vw;
+    }
+
+    .banner-main {
+      flex: 3;
+    }
+
+    .banner-main img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      display: block;
+    }
+
+    .banner-side {
+      flex: 1;
+    }
+
+    .banner-side img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+      .hero-left {
+        padding: 100px 6vw 60px;
+      }
+      .hero-right {
+        height: 50vw;
+      }
+      .hero-number {
+        font-size: 80px;
+        right: 20px;
+      }
+      .hero-meta {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+      }
+      section,
+      .results {
+        padding: 60px 5vw;
+      }
+      .challenge-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      .testimonials-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .results-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .goal {
+        max-width: 280px;
+      }
+      .next-project h2 {
+        font-size: 32px;
+      }
+      .footer-links {
+        gap: 20px;
+      }
+      .note-card {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .step-badge {
+        margin-bottom: 8px;
+      }
+      .category-layout,
+      .brand-section,
+      .banner-wrap {
+        flex-direction: column;
+      }
+      .category-right,
+      .brand-right,
+      .banner-side {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .hero-meta {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      .testimonials-grid {
+        grid-template-columns: 1fr;
+      }
+      .results-grid {
+        grid-template-columns: 1fr;
+      }
+      .result-item {
+        padding: 32px 20px;
+      }
+      .next-project {
+        flex-direction: column;
+        text-align: center;
+      }
+      footer {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <a href="home-1.html" class="nav-logo">K.</a>
+    
+    <!-- Desktop Navigation -->
+    <ul class="nav-center">
+      <li><a href="home-1.html">Home</a></li>
+      <li><a href="Projects.html">Projects</a></li>
+      <li><a href="about-me.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+
+    <!-- Hamburger Menu Button (Mobile) -->
+    <div class="hamburger" id="hamburgerBtn">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <a href="index.html" class="nav-back">Back to Portfolio</a>
+  </nav>
+
+  <!-- Mobile Menu Overlay (for clicking outside) -->
+  <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="Projects.html">Projects</a></li>
+      <li><a href="about-me.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <a href="index.html" class="mobile-back">Back to Portfolio</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <span class="hero-tag">UX / UI Case Study</span>
+      <h1 class="hero-title">Jones <br><em>Road Beauty</em></h1>
+      <p class="hero-desc">
+        Jones Road Beauty is a clean, minimalist makeup brand founded by Bobbi Brown in 2020. It
+        champions natural beauty with multi-purpose, high-performance products for all ages and skin tones.
+        The brand rejects excess, offering a curated line built on transparency and strict ingredient standards.
+        Its sleek, intuitive digital experience mirrors the philosophy: simple, effective, and authentically beautiful.
+      </p>
+      <div class="hero-meta">
+        <div class="meta-item"><label>Role</label><span>UX / UI Designer</span></div>
+        <div class="meta-item"><label>Duration</label><span>8 Weeks</span></div>
+        <div class="meta-item"><label>Tools</label><span>Figma, Maze</span></div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <img src="img/JRB/jbs.png" alt="Jones Road Beauty" class="hero-img-main">
+      <div class="hero-number">JRB</div>
+    </div>
+  </section>
+
+  <!-- CHALLENGE -->
+  <section class="challenge">
+    <div class="fade-up">
+      <div class="section-tag">Research</div>
+      <h2 class="section-title"><em>Jones Road Beauty</em><br>User Problems</h2>
+    </div>
+    <div class="challenge-grid">
+      <ul class="challenge-points stagger-children fade-up">
+        <li><span class="point-num">01</span>
+          <div class="point-text"><strong>Brand USP is not instantly clear.</strong>
+            <p>The clean, minimalist, hydration-focused positioning gets lost.</p>
+          </div>
+        </li>
+        <li><span class="point-num">02</span>
+          <div class="point-text"><strong>Limited interactivity reduces engagement.</strong>
+            <p>Product discovery feels disjointed, causing cart abandonment.</p>
+          </div>
+        </li>
+        <li><span class="point-num">03</span>
+          <div class="point-text"><strong>Inconsistent clickable elements.</strong>
+            <p>Users can't distinguish interactive elements easily.</p>
+          </div>
+        </li>
+        <li><span class="point-num">04</span>
+          <div class="point-text"><strong>Lack of product education.</strong>
+            <p>Missing ingredient/usage info reduces confidence.</p>
+          </div>
+        </li>
+      </ul>
+      <ul class="challenge-points stagger-children slide-right">
+        <li><span class="point-num">05</span>
+          <div class="point-text"><strong>Shade selection uncertainty.</strong>
+            <p>No guided tool → users hesitate before buying.</p>
+          </div>
+        </li>
+        <li><span class="point-num">06</span>
+          <div class="point-text"><strong>Heavy reliance on scrolling.</strong>
+            <p>No filtering/search system.</p>
+          </div>
+        </li>
+        <li><span class="point-num">07</span>
+          <div class="point-text"><strong>Weak SEO hierarchy.</strong>
+            <p>Poor headings and keyword structure.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- SOLUTIONS / GOALS -->
+  <section class="solutions">
+    <div class="solutions-intro fade-up">
+      <div>
+        <div class="section-tag">Design Strategy</div>
+        <h2 class="section-title">Project <em>Goals</em></h2>
+      </div>
+    </div>
+    <div class="goals fade-up">
+      <div class="goals-row">
+        <div class="goal">
+          <div class="goal-icon"><img src="img/JRB/i1.png" alt="Redesign icon"></div>
+          <p>Redesign the website into a cleaner, more interactive experience with improved structure, performance, and
+            SEO visibility.</p>
+        </div>
+        <div class="goal">
+          <div class="goal-icon"><img src="img/JRB/i2.png" alt="Engagement icon"></div>
+          <p>Encourage users to explore, understand, and connect with the brand through intuitive navigation and
+            compelling content.</p>
+        </div>
+        <div class="goal">
+          <div class="goal-icon"><img src="img/JRB/i3.png" alt="Trust icon"></div>
+          <p>Communicate how products are hygienic, easy to use, and designed for all age groups — building clarity and
+            trust.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SHOP BY COLLECTION NOTE -->
+  <div class="wrap">
+    <div class="note-card fade-up">
+      <div class="step-badge">1</div>
+      <div class="note-content">
+        <div class="note-title">Shop by collection section</div>
+        <ul class="note-list">
+          <li>Added concise bullet-point details to help users quickly understand the brand and product.</li>
+          <li>Designed a chic, modern layout for a clean and premium visual experience.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="category-layout">
+    <div class="category-left">
+      <img src="img/JRB/iPhone 16 - 10.png" alt="Shop by collection mobile">
+    </div>
+    <div class="category-right">
+      <img src="img/JRB/123.png" alt="Shop by collection desktop">
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="note-card fade-up">
+      <div class="step-badge">2</div>
+      <div class="note-content">
+        <div class="note-title">Get the Look</div>
+        <ul class="note-list">
+          <li>Design the section as a high-impact hero banner to immediately capture attention <br> and establish a
+            strong visual anchor on the page.</li>
+          <li>Clearly highlights key features for quick and effortless understanding.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="category-layout">
+    <div class="category-left">
+      <img src="img/JRB/gt.png" alt="Get the look preview">
+    </div>
+    <div class="category-right">
+      <img src="img/JRB/Surface Pro 8 - 17.png" alt="Get the look surface">
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="note-card fade-up">
+      <div class="step-badge">3</div>
+      <div class="note-content">
+        <div class="note-title">About the brand Section</div>
+        <ul class="note-list">
+          <li>The Visually rich "Get the look" layout makes product discovery intuitive, allowing users to find <br>
+            and shop featured items in fewer clicks.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="brand-section">
+    <div class="brand-left">
+      <img src="img/JRB/1234.png" alt="About the brand visual">
+    </div>
+    <div class="brand-right">
+      <img src="img/JRB/Frame 1984078335.png" alt="Brand story card">
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="note-card fade-up">
+      <div class="step-badge">4</div>
+      <div class="note-content">
+        <div class="note-title">Testimonial Section</div>
+        <ul class="note-list">
+          <li>This testimonial-driven carousel showcases real users and product results, <br> reinforcing authenticity
+            and social proof.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="banner-wrap">
+    <div class="banner-main">
+      <img src="img/JRB/Surface Pro 8 - 6.png" alt="Testimonial banner main">
+    </div>
+    <div class="banner-side">
+      <img src="img/JRB/Surface Pro 8 - 11.png" alt="Testimonial side card">
+    </div>
+  </div>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials">
+    <div class="testimonials-header fade-up">
+      <div>
+        <div class="section-tag">Community</div>
+        <h2 class="section-title">What people<br><em>are saying</em></h2>
+      </div>
+      <p style="font-size:13px;color:var(--muted);max-width:260px;line-height:1.7">Real customers, real results. No
+        filters, no retouching — just honest beauty.</p>
+    </div>
+    <div class="testimonials-grid stagger-children fade-up">
+      <div class="testi-item"><img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=500&q=80"
+          alt="Sarah">
+        <div class="testi-overlay">
+          <p class="testi-quote-text">"I've never felt more like myself wearing makeup."</p><span class="testi-author">—
+            Sarah M., 52</span>
+        </div>
+      </div>
+      <div class="testi-item"><img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=500&q=80"
+          alt="Priya">
+        <div class="testi-overlay">
+          <p class="testi-quote-text">"The shade finder actually found my shade. First time ever."</p><span
+            class="testi-author">— Priya K., 38</span>
+        </div>
+      </div>
+      <div class="testi-item"><img src="https://images.unsplash.com/photo-1597586124394-fbd6ef244026?w=500&q=80"
+          alt="Dana">
+        <div class="testi-overlay">
+          <p class="testi-quote-text">"Simple, honest, and it works. What more do you need?"</p><span
+            class="testi-author">— Dana R., 44</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULTS -->
+  <section class="results">
+    <div class="fade-up">
+      <div class="section-tag">Outcomes</div>
+      <h2 class="section-title" style="color:var(--cream)">Numbers that<br><em style="color:var(--warm)">speak</em></h2>
+    </div>
+    <div class="results-grid stagger-children fade-up">
+      <div class="result-item"><span class="result-number" data-target="68" data-prefix="+"
+          data-suffix="%">+68%</span><span class="result-label">Conversion Rate Increase</span></div>
+      <div class="result-item"><span class="result-number" data-target="3.2" data-suffix="×">3.2×</span><span
+          class="result-label">Return Visit Rate</span></div>
+      <div class="result-item"><span class="result-number" data-target="41" data-prefix="−"
+          data-suffix="%">−41%</span><span class="result-label">Cart Abandonment</span></div>
+      <div class="result-item"><span class="result-number" data-target="94" data-suffix="%">94%</span><span
+          class="result-label">Shade Match Satisfaction</span></div>
+    </div>
+  </section>
+
+  <!-- FOOTER IMAGE -->
+  <img src="img/JRB/footer.png" alt="Footer Image" class="footer-full-img">
+
+  <!-- NEXT PROJECT -->
+  <div class="next-project fade-up">
+    <h2>Next: <em style="font-style:italic">Supergut →</em></h2>
+    <a href="supergut-casestudy.html">View Case Study</a>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">K.</div>
+    <div class="footer-links">
+      <a href="#">LinkedIn</a>
+      <a href="#">Behance</a>
+      <a href="#">Contact</a>
+    </div>
+    <p class="footer-copy">© 2024 Kalyani Banginwar</p>
+  </footer>
+
+  <script>
+    // Intersection Observer for scroll animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          if (entry.target.classList.contains('results-grid')) {
+            entry.target.querySelectorAll('.result-number[data-target]').forEach(el => animateCount(el));
+          }
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: "0px 0px -20px 0px" });
+
+    document.querySelectorAll('.fade-up, .slide-right, .stagger-children').forEach(el => observer.observe(el));
+
+    function animateCount(el) {
+      const target = parseFloat(el.dataset.target);
+      const prefix = el.dataset.prefix || '';
+      const suffix = el.dataset.suffix || '';
+      const isDecimal = String(target).includes('.');
+      const duration = 1500;
+      const startTime = performance.now();
+      function update(now) {
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+        const current = target * eased;
+        el.textContent = prefix + (isDecimal ? current.toFixed(1) : Math.round(current)) + suffix;
+        if (progress < 1) requestAnimationFrame(update);
+      }
+      requestAnimationFrame(update);
+    }
+
+    window.addEventListener('scroll', () => {
+      const nav = document.querySelector('nav');
+      if (window.scrollY > 20) nav.style.boxShadow = '0 4px 24px rgba(26,20,16,0.08)';
+      else nav.style.boxShadow = 'none';
+    });
+
+    const heroImg = document.querySelector('.hero-img-main');
+    if (heroImg) {
+      heroImg.parentElement.addEventListener('mousemove', (e) => {
+        const rect = heroImg.parentElement.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        heroImg.style.transform = `scale(1.02) translate(${x * 6}px, ${y * 6}px)`;
+      });
+      heroImg.parentElement.addEventListener('mouseleave', () => { heroImg.style.transform = ''; });
+    }
+
+    // ========== HAMBURGER MENU TOGGLE WITH OUTSIDE CLICK ==========
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileOverlay = document.getElementById('mobileMenuOverlay');
+
+    function closeMenu() {
+      hamburgerBtn.classList.remove('open');
+      mobileMenu.classList.remove('active');
+      mobileOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function openMenu() {
+      hamburgerBtn.classList.add('open');
+      mobileMenu.classList.add('active');
+      mobileOverlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    if (hamburgerBtn && mobileMenu && mobileOverlay) {
+      hamburgerBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (mobileMenu.classList.contains('active')) {
+          closeMenu();
+        } else {
+          openMenu();
+        }
+      });
+
+      // Close when clicking on overlay (outside)
+      mobileOverlay.addEventListener('click', closeMenu);
+
+      // Close when clicking on any link inside menu
+      mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', closeMenu);
+      });
+
+      // Close on escape key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
+          closeMenu();
+        }
+      });
+    }
+
+    // Close menu on window resize (if desktop)
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 900 && mobileMenu && mobileMenu.classList.contains('active')) {
+        closeMenu();
+      }
+    });
+  </script>
+</body>
+
+</html>

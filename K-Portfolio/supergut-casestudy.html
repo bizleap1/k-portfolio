@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Supergut — UX Case Study</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap"
+    rel="stylesheet" />
+  <link rel="icon" type="image/png" href="Kb 2 logo .png">
+
+  <style>
+    :root {
+      --green: #4C8A2F;
+      --green2: #6AAF3D;
+      --gp: #E8F3E0;
+      --cream: #F7F5EF;
+      --dark: #181A18;
+      --gray: #555;
+      --gl: #888;
+      --gm: #BDBDBD;
+      --br: #E2E2E0;
+      --w: #fff;
+      --accent: #B8967A;
+      --muted: #8A7A6E;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: #EDEDEB;
+      color: var(--dark);
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    /* ========== NAVIGATION BAR (FULL, WITH HAMBURGER) ========== */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 5vw;
+      backdrop-filter: blur(12px);
+      background: rgba(253, 250, 246, 0.96);
+      border-bottom: 1px solid rgba(76, 138, 47, 0.2);
+      transition: all 0.3s ease;
+      animation: navSlideDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    @keyframes navSlideDown {
+      from {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--dark);
+      text-decoration: none;
+      z-index: 1001;
+    }
+
+    /* Desktop Navigation Links */
+    .nav-center {
+      display: flex;
+      gap: 40px;
+      list-style: none;
+      margin: 0 auto;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .nav-center li a {
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #000;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .nav-center li a:hover {
+      color: var(--green);
+    }
+
+    .nav-back {
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--green);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-left: auto;
+      z-index: 1001;
+    }
+
+    .nav-back::before {
+      content: '←';
+      font-size: 16px;
+    }
+
+    /* Hamburger Menu */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 28px;
+      height: 20px;
+      cursor: pointer;
+      z-index: 1001;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background: var(--dark);
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    .hamburger.open span:nth-child(1) {
+      transform: translateY(9px) rotate(45deg);
+    }
+
+    .hamburger.open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.open span:nth-child(3) {
+      transform: translateY(-9px) rotate(-45deg);
+    }
+
+    /* Mobile Menu Overlay */
+    .mobile-menu-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 998;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .mobile-menu-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 75%;
+      max-width: 320px;
+      height: 100vh;
+      background: rgba(253, 250, 246, 0.98);
+      backdrop-filter: blur(20px);
+      z-index: 999;
+      padding: 100px 40px 40px;
+      transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: -5px 0 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .mobile-menu.active {
+      right: 0;
+    }
+
+    .mobile-menu ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .mobile-menu ul li a {
+      font-size: 18px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--dark);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .mobile-menu ul li a:hover {
+      color: var(--green);
+    }
+
+    .mobile-menu .mobile-back {
+      margin-top: 40px;
+      font-size: 14px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--green);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .mobile-menu .mobile-back::before {
+      content: '←';
+      font-size: 16px;
+    }
+
+    @media (max-width: 900px) {
+      .nav-center {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .nav-back {
+        display: none;
+      }
+
+      nav {
+        padding: 14px 5vw;
+      }
+    }
+
+    @media (min-width: 901px) {
+
+      .mobile-menu,
+      .mobile-menu-overlay {
+        display: none;
+      }
+    }
+
+    /* HERO */
+    .main-hero {
+      width: 100%;
+      overflow: hidden;
+      margin-top: 70px;
+    }
+
+    .hero-image {
+      width: 100%;
+    }
+
+    .hero-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* PROBLEM STATEMENT */
+    .problem-wrap {
+      width: 100%;
+      background: #f3f3f3;
+      padding: 80px 0;
+    }
+
+    .problem-inner {
+      width: 100%;
+      max-width: 1400px;
+      margin: auto;
+      padding: 0 60px;
+    }
+
+    .problem-title {
+      font-size: 42px;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .problem-title .black {
+      color: #111;
+    }
+
+    .problem-title .green {
+      color: #4C8A2F;
+    }
+
+    .problem-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .problem-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .problem-card {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      padding: 16px 18px;
+      
+      border-radius: 12px;
+      transition: 0.2s ease;
+    }
+
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      background: #4C8A2F;
+      border-radius: 50%;
+      margin-top: 8px;
+      flex-shrink: 0;
+    }
+
+    .problem-card p {
+      font-size: 15px;
+      line-height: 1.6;
+      color: #3D2F25;
+      margin: 0;
+    }
+
+    .problem-image {
+      display: flex;
+      justify-content: center;
+    }
+
+    .image-card {
+      background: #fff;
+      padding: 30px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+      transition: transform 0.3s ease;
+    }
+
+    .image-card:hover {
+      transform: translateY(-8px);
+    }
+
+    .image-card img {
+      width: 100%;
+      max-width: 350px;
+      display: block;
+    }
+
+    .hr {
+      height: 1px;
+      background: var(--br);
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* APPROACH */
+    .approach-wrap {
+      padding: 80px 60px;
+      background: #fff;
+    }
+
+    .approach-flex {
+      display: flex;
+      align-items: center;
+      gap: 60px;
+    }
+
+    .approach-img-box {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
+
+    .approach-img-card {
+      padding: 18px;
+      transition: 0.3s ease;
+    }
+
+    .approach-img {
+      width: 100%;
+      max-width: 390px;
+      height: auto;
+      display: block;
+    }
+
+    .approach-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .approach-item {
+      display: flex;
+      gap: 14px;
+      padding: 16px 18px;
+   
+      border-radius: 12px;
+      transition: 0.2s ease;
+    }
+
+   
+
+    .approach-dot {
+      width: 8px;
+      height: 8px;
+      background: #4C8A2F;
+      border-radius: 50%;
+      margin-top: 8px;
+      flex-shrink: 0;
+    }
+
+    .approach-item p {
+      font-size: 15px;
+      line-height: 1.6;
+      color: #3D2F25;
+      margin: 0;
+    }
+
+    /* ROLE */
+    .role {
+      text-align: center;
+      padding: 72px 0;
+    }
+
+    .role-label {
+      font-size: 38px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #000;
+    }
+
+    .role-label span {
+      color: #4C8A2F;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .tag {
+      background: #4C8A2F;
+      color: #fff;
+      padding: 8px 20px;
+      border-radius: 50px;
+      font-size: 12px;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+
+    .tag:hover {
+      background: #6AAF3D;
+      transform: translateY(-2px);
+    }
+
+    /* DESIGN THINKING */
+    .dt-wrap {
+      background: #f5f2f2;
+      padding: 80px 40px;
+      text-align: center;
+    }
+
+    .dt-flow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .dt-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      max-width: 160px;
+      gap: 8px;
+    }
+
+    .dt-circle {
+      width: 120px;
+      height: 120px;
+      border-radius: 100%;
+      background: #E8F3E0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.05);
+      transition: transform 0.3s;
+    }
+
+    .dt-circle:hover {
+      transform: scale(1.05);
+    }
+
+    .dt-circle img {
+      width: 50px;
+      height: 50px;
+      object-fit: contain;
+    }
+
+    .dt-arrow {
+      font-size: 32px;
+      color: #6AAF3D;
+      letter-spacing: -4px;
+    }
+
+    .dt-label {
+      color: #000;
+      font-size: 15px;
+      font-weight: 700;
+      margin: 8px 0 4px;
+    }
+
+    .dt-desc {
+      color: #555;
+      font-size: 11px;
+      line-height: 1.4;
+    }
+
+    /* TIMELINE */
+    .timeline-wrap {
+      background: #efefef;
+      padding: 80px 40px;
+    }
+
+    .timeline-container {
+      display: flex;
+      justify-content: center;
+    }
+
+    .timeline-card {
+      background: #fff;
+      padding: 30px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+      text-align: center;
+      max-width: 900px;
+      width: 100%;
+    }
+
+    .timeline-card img {
+      width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+      border-radius: 10px;
+    }
+
+    .timeline-card p {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: 600;
+      color: #3D2F25;
+    }
+
+    .ux-full {
+      width: 100%;
+      text-align: center;
+    }
+
+    .ux-full img {
+      width: 100%;
+      display: block;
+    }
+
+    .ux-label {
+      margin-top: 12px;
+      font-size: 16px;
+      font-weight: 500;
+      color: #4C8A2F;
+    }
+
+    /* TYPOGRAPHY & COLORS */
+    .tco {
+      background: #fff;
+      padding: 52px;
+      max-width: 1200px;
+      margin: 60px auto;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.06);
+    }
+
+    .tc2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 52px;
+      margin-top: 36px;
+    }
+
+    .fd {
+      font-size: 52px;
+      font-weight: 700;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      border: 2px solid var(--br);
+      border-radius: 14px;
+      padding: 18px 26px;
+      display: inline-block;
+      margin-bottom: 16px;
+      color: #4C8A2F;
+    }
+
+    .fl {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--gl);
+      margin-bottom: 5px;
+    }
+
+    .fn {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .fv {
+      font-size: 13px;
+      color: var(--gray);
+      padding: 4px 0;
+      border-bottom: 1px solid var(--br);
+    }
+
+    .cr {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .sw {
+      border-radius: 14px;
+      overflow: hidden;
+      width: 100px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.09);
+    }
+
+    .swc {
+      height: 72px;
+    }
+
+    .swi {
+      padding: 9px 11px;
+      background: var(--cream);
+    }
+
+    .swn {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--dark);
+    }
+
+    .swh {
+      font-size: 10px;
+      color: var(--gl);
+    }
+
+    /* VISUAL DESIGN */
+    #visual-design {
+      padding: 80px 0;
+      background: #fff;
+      text-align: center;
+    }
+
+    .vd-heading {
+      font-size: 36px;
+      margin-bottom: 50px;
+      font-weight: 600;
+    }
+
+    .vd-heading span {
+      color: #4C8A2F;
+    }
+
+    .vd-img {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .vd-img img {
+      width: 100%;
+      max-width: 850px;
+      height: auto;
+      display: block;
+    }
+
+    .vd-img img:first-child {
+      margin-bottom: 60px;
+    }
+
+    /* FIBER SECTION */
+    .fiber-section {
+      width: 100%;
+      padding: 60px 20px;
+      background: #F8FFEC;
+    }
+
+    .fiber-container {
+      max-width: 1200px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    .fiber-left img {
+      width: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .fiber-sub-img {
+      width: 70%;
+      margin-top: 12px;
+    }
+
+    .fiber-right-images {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .fiber-right-images img {
+      width: 100%;
+      object-fit: cover;
+    }
+
+    /* THANK YOU */
+    .ty-wrap {
+      padding: 100px 40px;
+      background: #fff;
+      text-align: center;
+    }
+
+    .ty-box {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .ty-img img {
+      width: 300px;
+      height: auto;
+      margin-bottom: 20px;
+    }
+
+    .ty-title {
+      font-size: 36px;
+      font-weight: 600;
+      color: #1A1410;
+      margin-bottom: 10px;
+    }
+
+    .ty-desc {
+      font-size: 16px;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    /* NEXT PROJECT */
+    .next-project {
+      background: #4C8A2F;
+      padding: 60px 6vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 28px;
+    }
+
+    .next-project h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 40px;
+      font-weight: 300;
+      color: #fff;
+    }
+
+    .next-project a {
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #fff;
+      text-decoration: none;
+      border-bottom: 1px solid #fff;
+      padding-bottom: 4px;
+      transition: 0.2s;
+    }
+
+    .next-project a:hover {
+      opacity: 0.8;
+      letter-spacing: 0.25em;
+    }
+
+    @media (max-width: 900px) {
+
+      .problem-grid,
+      .approach-flex,
+      .tc2,
+      .dt-flow {
+        flex-direction: column;
+        grid-template-columns: 1fr;
+      }
+
+      .dt-flow {
+        flex-direction: column;
+      }
+
+      .dt-arrow {
+        transform: rotate(90deg);
+      }
+
+      .problem-inner {
+        padding: 0 20px;
+      }
+
+      .approach-wrap {
+        padding: 60px 20px;
+      }
+
+      .tco {
+        margin: 40px 20px;
+        padding: 30px 20px;
+      }
+
+      .fd {
+        font-size: 36px;
+      }
+
+      .fiber-container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .problem-title {
+        font-size: 28px;
+      }
+
+      .role-label {
+        font-size: 28px;
+      }
+
+      .vd-heading {
+        font-size: 26px;
+      }
+
+      .ty-title {
+        font-size: 28px;
+      }
+    }
+
+    .wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- FULL NAVIGATION BAR -->
+  <nav>
+    <a href="home-1.html" class="nav-logo">K.</a>
+
+    <!-- Desktop Navigation -->
+    <ul class="nav-center">
+      <li><a href="home-1.html">Home</a></li>
+      <li><a href="portfolio-3.html">Projects</a></li>
+      <li><a href="about-me.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+
+    <!-- Hamburger Menu Button (Mobile) -->
+    <div class="hamburger" id="hamburgerBtn">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <a href="index.html" class="nav-back">Back to Portfolio</a>
+  </nav>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="portfolio-3.html">Projects</a></li>
+      <li><a href="about-me.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <a href="index.html" class="mobile-back">Back to Portfolio</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="main-hero">
+    <div class="hero-image">
+      <img src="img/Supergut/Group 1000009005.png" alt="Hero Image">
+    </div>
+  </section>
+
+  <!-- PROBLEM STATEMENT -->
+  <section class="problem-wrap">
+    <div class="problem-inner">
+      <h2 class="problem-title">
+        <span class="black">Problem</span>
+        <span class="green">Statement</span>
+      </h2>
+      <div class="problem-grid">
+        <div class="problem-list">
+          <div class="problem-card"><span class="dot"></span>
+            <p>Required a user-friendly above-the-fold layout for quick scanning of image gallery and key product
+              information.</p>
+          </div>
+          <div class="problem-card"><span class="dot"></span>
+            <p>Needed a clearer and more prominent presentation of the ingredient list as the most critical information.
+            </p>
+          </div>
+          <div class="problem-card"><span class="dot"></span>
+            <p>Product page had to remain informative yet concise, avoiding excessive text.</p>
+          </div>
+          <div class="problem-card"><span class="dot"></span>
+            <p>Interactivity across the website needed improvement to create a more engaging and modern user experience.
+            </p>
+          </div>
+        </div>
+        <div class="problem-image">
+          <div class="image-card">
+            <img src="img/Supergut/Group 485.png" alt="Problem visual">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="hr"></div>
+
+  <!-- THE APPROACH -->
+  <div class="approach-wrap">
+    <h2 class="problem-title">
+      <span class="black">The</span>
+      <span class="green">Approach</span>
+    </h2>
+    <div class="approach-flex">
+      <div class="approach-img-box">
+        <div class="approach-img-card">
+          <img src="img/Supergut/undraw_logic_re_nyb4 1.png" alt="Approach Image" class="approach-img">
+        </div>
+      </div>
+      <div class="approach-content">
+        <div class="approach-item"><span class="approach-dot"></span>
+          <p>Replaced the image carousel with a structured image gallery for faster scanning and improved visual clarity
+            above the fold.</p>
+        </div>
+        <div class="approach-item"><span class="approach-dot"></span>
+          <p>Introduced dedicated testimonials and FAQ sections to build trust and reduce decision friction.</p>
+        </div>
+        <div class="approach-item"><span class="approach-dot"></span>
+          <p>Designed a strong USP banner to clearly communicate product value at first glance.</p>
+        </div>
+        <div class="approach-item"><span class="approach-dot"></span>
+          <p>Developed an interactive ingredient section to highlight key components without overwhelming users with
+            dense text.</p>
+        </div>
+        <div class="approach-item"><span class="approach-dot"></span>
+          <p>Added a comparison chart to simplify decision-making and showcase product differentiation effectively.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hr"></div>
+
+  <!-- MY ROLE -->
+  <div class="wrap">
+    <div class="role">
+      <p class="role-label">My <span>Role</span></p>
+      <div class="tags">
+        <span class="tag">Design Strategy</span>
+        <span class="tag">Problem Solution</span>
+        <span class="tag">Information Architecture</span>
+        <span class="tag">Empathy Mapping</span>
+        <span class="tag">Usability Testing</span>
+        <span class="tag">User Flow Mapping</span>
+        <span class="tag">Prototyping</span>
+        <span class="tag">Wireframes</span>
+        <span class="tag">Competitive Analysis</span>
+        <span class="tag">Visual Design</span>
+        <span class="tag">User Research</span>
+        <span class="tag">User Personas</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hr"></div>
+
+  <!-- DESIGN THINKING PROCESS -->
+  <section class="dt-wrap">
+    <h2 class="problem-title">
+      <span class="black">Designing</span>
+      <span class="green">Thinking Process</span>
+    </h2>
+    <div class="dt-flow">
+      <div class="dt-step">
+        <div class="dt-circle"><img src="img/Supergut/Group 1000009015.png" alt=""></div>
+        <p class="dt-label">Research</p>
+        <p class="dt-desc">User Research<br>Entrant Analysis</p>
+      </div>
+      <div class="dt-arrow">›››</div>
+      <div class="dt-step">
+        <div class="dt-circle"><img src="img/Supergut/Group 1000009014.png" alt=""></div>
+        <p class="dt-label">Define</p>
+        <p class="dt-desc">User Persons Goal Statement<br>User Journey Map</p>
+      </div>
+      <div class="dt-arrow">›››</div>
+      <div class="dt-step">
+        <div class="dt-circle"><img src="img/Supergut/Group 1000009013.png" alt=""></div>
+        <p class="dt-label">Ideate</p>
+        <p class="dt-desc">Brainstorming, Card Sorting<br>User Flow</p>
+      </div>
+      <div class="dt-arrow">›››</div>
+      <div class="dt-step">
+        <div class="dt-circle"><img src="img/Supergut/Group 1000009012.png" alt=""></div>
+        <p class="dt-label">Design</p>
+        <p class="dt-desc">Paper Wireframes<br>Visual Design, Prototype</p>
+      </div>
+      <div class="dt-arrow">›››</div>
+      <div class="dt-step">
+        <div class="dt-circle"><img src="img/Supergut/Group 1000009011.png" alt=""></div>
+        <p class="dt-label">Test</p>
+        <p class="dt-desc">Check Usability<br>A/B Testing</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECT TIMELINE -->
+  <section class="timeline-wrap">
+    <h2 class="problem-title">
+      <span class="black">Project</span>
+      <span class="green">Timeline</span>
+    </h2>
+    <div class="timeline-container">
+      <div class="timeline-card">
+        <img src="img/Supergut/Group 470.png" alt="UX Design Timeline">
+        <p>UX Design</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HIGH-FIDELITY WIREFRAMES -->
+  <section class="timeline-wrap">
+    <h2 class="problem-title">
+      <span class="black">High-Fidelity</span>
+      <span class="green">Wireframes</span>
+    </h2>
+    <div class="timeline-container">
+      <div class="ux-full">
+        <img src="img/Supergut/Wireframe - 1.png" alt="High-Fidelity Wireframes">
+        <p class="ux-label">UX Design</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TYPOGRAPHY & COLORS -->
+  <div class="tco">
+    <h2 class="problem-title">
+      <span class="black">Typography &</span>
+      <span class="green">Colors</span>
+    </h2>
+    <div class="tc2">
+      <div>
+        <p class="fl">Font Used</p>
+        <div class="fd">Helvetica</div>
+        <div class="fn">Helvetica Neue</div>
+        <div class="fv"><b>Helvetica Bold</b> — Headlines &amp; emphasis</div>
+        <div class="fv"><b>Helvetica Medium</b> — Sub-headings, labels</div>
+        <div class="fv"><b>Helvetica Light</b> — Body copy &amp; captions</div>
+      </div>
+      <div>
+        <p class="fl">Color Used</p>
+        <div class="cr">
+          <div class="sw">
+            <div class="swc" style="background:#4C8A2F;"></div>
+            <div class="swi">
+              <div class="swn">Primary</div>
+              <div class="swh">#4C8A2F</div>
+            </div>
+          </div>
+          <div class="sw">
+            <div class="swc" style="background:#E8F3E0;"></div>
+            <div class="swi">
+              <div class="swn">Secondary</div>
+              <div class="swh">#E8F3E0</div>
+            </div>
+          </div>
+          <div class="sw">
+            <div class="swc" style="background:#1A1A1A;"></div>
+            <div class="swi">
+              <div class="swn">Text Dark</div>
+              <div class="swh">#1A1A1A</div>
+            </div>
+          </div>
+          <div class="sw">
+            <div class="swc" style="background:#888888;"></div>
+            <div class="swi">
+              <div class="swn">Text Muted</div>
+              <div class="swh">#888888</div>
+            </div>
+          </div>
+          <div class="sw">
+            <div class="swc" style="background:#F7F5EF;"></div>
+            <div class="swi">
+              <div class="swn">BG Cream</div>
+              <div class="swh">#F7F5EF</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VISUAL DESIGN -->
+  <section id="visual-design">
+    <h2 class="vd-heading">Visual <span>Design</span></h2>
+    <div class="vd-img">
+      <img src="img/Supergut/mck1.png" alt="Visual Design UI">
+      <img class="vd-img-2" src="img/Supergut/mck2.png" alt="Visual Design UI">
+    </div>
+  </section>
+
+  <!-- FINAL SCREENS -->
+  <section class="fiber-section">
+    <div class="fiber-container">
+      <div class="fiber-left">
+        <img src="img/Supergut/Surface Pro 8 - 13.png" alt="product">
+        <img src="img/Supergut/Surface Pro 8 - 14.png" alt="product" class="fiber-sub-img">
+      </div>
+      <div class="fiber-right">
+        <div class="fiber-right-images">
+          <img src="img/Supergut/Surface Pro 8 - 12.png" alt="">
+          <img src="img/Supergut/Surface Pro 8 - 11.png" alt="">
+          <img src="img/Supergut/Surface Pro 8 - 8.png" alt="">
+          <img src="img/Supergut/Surface Pro 8 - 2.png" alt="">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THANK YOU -->
+  <section class="ty-wrap">
+    <div class="ty-box">
+      <div class="ty-img">
+        <img src="img/Supergut/thanks.png" alt="Thank You">
+      </div>
+      <h2 class="ty-title">Thank you for your time ☺️</h2>
+      <p class="ty-desc">A UX/UI Case Study crafted with research, empathy & design thinking.</p>
+    </div>
+  </section>
+
+  <!-- NEXT PROJECT -->
+  <div class="next-project fade-up">
+    <h2>Next: <em style="font-style:italic">Create Room →</em></h2>
+    <a href="create-room-casestudy.html">View Case Study</a>
+  </div>
+
+  <script>
+    // Hamburger menu toggle with outside click support
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileOverlay = document.getElementById('mobileMenuOverlay');
+
+    function closeMenu() {
+      hamburgerBtn.classList.remove('open');
+      mobileMenu.classList.remove('active');
+      mobileOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function openMenu() {
+      hamburgerBtn.classList.add('open');
+      mobileMenu.classList.add('active');
+      mobileOverlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    if (hamburgerBtn && mobileMenu && mobileOverlay) {
+      hamburgerBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (mobileMenu.classList.contains('active')) {
+          closeMenu();
+        } else {
+          openMenu();
+        }
+      });
+
+      mobileOverlay.addEventListener('click', closeMenu);
+      mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', closeMenu);
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
+          closeMenu();
+        }
+      });
+    }
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 900 && mobileMenu && mobileMenu.classList.contains('active')) {
+        closeMenu();
+      }
+    });
+
+    // Nav shadow on scroll
+    window.addEventListener('scroll', () => {
+      const nav = document.querySelector('nav');
+      if (window.scrollY > 20) nav.style.boxShadow = '0 4px 24px rgba(0,0,0,0.08)';
+      else nav.style.boxShadow = 'none';
+    });
+  </script>
+</body>
+
+</html>
